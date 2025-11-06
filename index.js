@@ -1,12 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const app = express();
 const port = 3000;
 
-app.get(cors())
-app.use(express.json())
+app.get(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello bhai!");
@@ -18,8 +18,8 @@ app.get("/hello", (req, res) => {
 
 //MongoDB
 
-
-const uri = "mongodb+srv://model-db:C4cYRrIzRpkuSPeM@cluster0.bnkmq1v.mongodb.net/?appName=Cluster0";
+const uri =
+  "mongodb+srv://model-db:C4cYRrIzRpkuSPeM@cluster0.bnkmq1v.mongodb.net/?appName=Cluster0";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -27,7 +27,7 @@ const client = new MongoClient(uri, {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
-  }
+  },
 });
 
 async function run() {
@@ -35,20 +35,28 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    const db = client.db("model-db");
+    const modelCollection = db.collection("models");
 
+    app.get("/models", async (req, res) => {
 
+      const result = await modelCollection.find().toArray();
 
-    
+      res.send(result);
+    });
+    app.get("/users");
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
   }
 }
 run().catch(console.dir);
-
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
