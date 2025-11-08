@@ -40,7 +40,7 @@ const Home = () => {
           <img src="https://placehold.co/600x400/222/fff?text=3D+Model" className="max-w-sm rounded-lg shadow-2xl" />
           <div className="lg:mr-10">
             <h1 className="text-5xl font-bold leading-tight">Explore a Universe of 3D Models</h1>
-            <p className="py-6 text-lg">Welcome to 3D Model Hub, the ultimate platform for artists, developers, and creators to share, discover, and download high-quality 3D assets.</p>
+            <p className="py-6 text-lg">Welcome to 3D Model Hub, the ultimate platform for artists, developers, and creators to and download high-quality 3D assets.</p>
             <Link to="/models" className="btn btn-accent btn-lg font-bold">Browse All Models</Link>
           </div>
         </div>
